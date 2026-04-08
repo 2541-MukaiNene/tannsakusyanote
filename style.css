@@ -1,6 +1,7 @@
 :root {
   --bg: #f5f7fb;
   --card: #ffffff;
+  --card-soft: #fafafa;
   --text: #1f2937;
   --subtext: #6b7280;
   --border: #d1d5db;
@@ -9,6 +10,26 @@
   --danger-hover: #b01523;
   --button: #111827;
   --button-hover: #000000;
+  --textarea-bg: #fcfcfd;
+  --empty-bg: #fbfbfc;
+  --focus: #7aaeff;
+}
+
+body.dark-mode {
+  --bg: #0f172a;
+  --card: #111827;
+  --card-soft: #1f2937;
+  --text: #f3f4f6;
+  --subtext: #cbd5e1;
+  --border: #334155;
+  --shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  --button: #334155;
+  --button-hover: #475569;
+  --textarea-bg: #0b1220;
+  --empty-bg: #111827;
+  --focus: #93c5fd;
 }
 
 * {
@@ -22,6 +43,7 @@ body {
     "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
   background: var(--bg);
   color: var(--text);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .app {
@@ -32,6 +54,13 @@ body {
 
 .app-header {
   margin-bottom: 20px;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
 }
 
 .app-header h1 {
@@ -45,6 +74,37 @@ body {
   font-size: 0.95rem;
 }
 
+.theme-toggle {
+  width: 52px;
+  height: 52px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.05);
+}
+
+.theme-toggle-inner {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffd54f 50%, #1e293b 50%);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+body.dark-mode .theme-toggle-inner {
+  background: linear-gradient(135deg, #e2e8f0 50%, #0f172a 50%);
+}
+
 .input-section,
 .list-section {
   background: var(--card);
@@ -53,6 +113,7 @@ body {
   box-shadow: var(--shadow);
   padding: 16px;
   margin-bottom: 20px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .section-title {
@@ -71,13 +132,14 @@ textarea {
   padding: 12px;
   font-size: 0.95rem;
   line-height: 1.5;
-  background: #fcfcfd;
+  background: var(--textarea-bg);
   color: var(--text);
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 textarea:focus {
-  outline: 2px solid #9ec5ff;
-  border-color: #7aaeff;
+  outline: 2px solid color-mix(in srgb, var(--focus) 45%, transparent);
+  border-color: var(--focus);
 }
 
 .hint {
@@ -93,11 +155,11 @@ textarea:focus {
 }
 
 .message.success {
-  color: #0f8a3d;
+  color: #16a34a;
 }
 
 .message.error {
-  color: #c81e1e;
+  color: #ef4444;
 }
 
 .list-header {
@@ -119,7 +181,8 @@ textarea:focus {
   border-left: 10px solid #888888;
   border-radius: 14px;
   padding: 14px;
-  background: #ffffff;
+  background: var(--card);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .card-top {
@@ -177,6 +240,10 @@ textarea:focus {
   word-break: break-all;
 }
 
+.meta-row a {
+  color: inherit;
+}
+
 .grid-group {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
@@ -189,7 +256,8 @@ textarea:focus {
   border-radius: 12px;
   padding: 10px 8px;
   text-align: center;
-  background: #fafafa;
+  background: var(--card-soft);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .stat-label {
@@ -210,10 +278,15 @@ textarea:focus {
   padding: 24px;
   text-align: center;
   color: var(--subtext);
-  background: #fbfbfc;
+  background: var(--empty-bg);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 @media (max-width: 640px) {
+  .header-top {
+    align-items: center;
+  }
+
   .card-top {
     flex-direction: column;
   }
@@ -227,6 +300,15 @@ textarea:focus {
   }
 
   .list-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .theme-toggle {
+    width: 46px;
+    height: 46px;
+  }
+}
     flex-direction: column;
     align-items: stretch;
   }
