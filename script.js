@@ -1,9 +1,11 @@
 const STORAGE_KEY = "iacharaCharacters";
+const THEME_KEY = "iacharaTheme";
 
 const jsonInput = document.getElementById("jsonInput");
 const characterList = document.getElementById("characterList");
 const message = document.getElementById("message");
 const clearAllButton = document.getElementById("clearAllButton");
+const themeToggle = document.getElementById("themeToggle");
 
 const PARAM_ORDER = ["STR", "CON", "POW", "DEX", "APP", "SIZ", "INT", "EDU"];
 const STATUS_ORDER = ["HP", "MP", "SAN"];
@@ -253,6 +255,32 @@ function handlePasteInput() {
   }
 }
 
+function applyTheme(theme) {
+  if (theme === "dark") {
+    document.body.classList.add("dark-mode");
+  } else {
+    document.body.classList.remove("dark-mode");
+  }
+  localStorage.setItem(THEME_KEY, theme);
+}
+
+function loadTheme() {
+  const savedTheme = localStorage.getItem(THEME_KEY);
+
+  if (savedTheme === "dark" || savedTheme === "light") {
+    applyTheme(savedTheme);
+    return;
+  }
+
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  applyTheme(prefersDark ? "dark" : "light");
+}
+
+function toggleTheme() {
+  const isDark = document.body.classList.contains("dark-mode");
+  applyTheme(isDark ? "light" : "dark");
+}
+
 jsonInput.addEventListener("paste", () => {
   setTimeout(handlePasteInput, 50);
 });
@@ -260,5 +288,7 @@ jsonInput.addEventListener("paste", () => {
 jsonInput.addEventListener("change", handlePasteInput);
 
 clearAllButton.addEventListener("click", clearAllCharacters);
+themeToggle.addEventListener("click", toggleTheme);
 
+loadTheme();
 renderCharacters();
