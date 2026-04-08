@@ -9,17 +9,31 @@
 <body>
   <main class="app">
     <header class="app-header">
-      <h1>iachara 探索者ビューア</h1>
-      <p class="subtitle">
-        iacharaのJSONを貼り付けると、自動で保存・一覧表示します
-      </p>
+      <div class="header-top">
+        <div>
+          <h1>iachara 探索者ビューア</h1>
+          <p class="subtitle">
+            iacharaのJSONを貼り付けると、自動で保存・一覧表示します
+          </p>
+        </div>
+
+        <button
+          id="themeToggle"
+          class="theme-toggle"
+          type="button"
+          aria-label="テーマ切り替え"
+          title="ライト / ダーク切り替え"
+        >
+          <span class="theme-toggle-inner"></span>
+        </button>
+      </div>
     </header>
 
     <section class="input-section">
       <label for="jsonInput" class="section-title">JSON貼り付け</label>
       <textarea
         id="jsonInput"
-        placeholder='ここに iachara のJSONを貼り付けてください'
+        placeholder="ここに iachara のJSONを貼り付けてください"
         spellcheck="false"
       ></textarea>
       <p class="hint">
