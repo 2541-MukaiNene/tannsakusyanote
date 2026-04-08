@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iachara 探索者ビューア</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <h1>iachara 探索者ビューア</h1>
+      <p class="subtitle">
+        iacharaのJSONを貼り付けると、自動で保存・一覧表示します
+      </p>
+    </header>
+
+    <section class="input-section">
+      <label for="jsonInput" class="section-title">JSON貼り付け</label>
+      <textarea
+        id="jsonInput"
+        placeholder='ここに iachara のJSONを貼り付けてください'
+        spellcheck="false"
+      ></textarea>
+      <p class="hint">
+        貼り付け後、自動で登録されます。同じキャラは上書きされます。
+      </p>
+      <p id="message" class="message"></p>
+    </section>
+
+    <section class="list-section">
+      <div class="list-header">
+        <h2 class="section-title">保存済みキャラ</h2>
+        <button id="clearAllButton" class="danger-button" type="button">
+          全削除
+        </button>
+      </div>
+      <div id="characterList" class="character-list"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
